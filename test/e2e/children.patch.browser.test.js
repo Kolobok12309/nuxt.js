@@ -153,6 +153,26 @@ describe('children patch (browser)', () => {
     })
   })
 
+  describe('refresh child component if param and query is changed and watchQuery is true and watchParam is false', () => {
+    test('Navigate to /patch/2/child-param/1?test=true', async () => {
+      await page.nuxt.navigate('/patch/2/child-param/1?test=true')
+      dates.slug = await page.$text('[data-date-slug]')
+
+      expect(dates.patch).toBe(await page.$text('[data-date-patch]'))
+      expect(dates.id).toBe(await page.$text('[data-date-id]'))
+    })
+
+    test('Navigate to /patch/2/child-param/2#test', async () => {
+      await page.nuxt.navigate('/patch/2/child-param/2#test')
+      const slug = await page.$text('[data-date-slug]')
+
+      expect(+dates.slug < +slug).toBe(true)
+      expect(dates.patch).toBe(await page.$text('[data-date-patch]'))
+      expect(dates.id).toBe(await page.$text('[data-date-id]'))
+      dates.slug = slug
+    })
+  })
+
   // Close server and ask nuxt to stop listening to file changes
   afterAll(async () => {
     await nuxt.close()

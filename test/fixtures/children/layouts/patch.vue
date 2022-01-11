@@ -57,6 +57,16 @@
           /patch/2/reuse/2
         </NuxtLink>
       </li>
+      <li>
+        <NuxtLink data-test-id="patch-id-2-child-param-1" to="/patch/2/child-param/1?test=true">
+          /patch/2/child-param/1?test=true
+        </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink data-test-id="patch-id-2-child-param-2" to="/patch/2/child-param/2#test">
+          /patch/2/child-param/2#test
+        </NuxtLink>
+      </li>
     </ul>
   </div>
 </template>
